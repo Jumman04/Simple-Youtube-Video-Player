@@ -4,156 +4,112 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.youtube.player.YouTubeBaseActivity;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerView;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends YouTubeBaseActivity {
+public class MainActivity extends AppCompatActivity {
 
-    YouTubePlayerView youTubePlayerView;
-    YouTubePlayer jummania_youtube_player;
-
+    final ArrayList<HashMap<String, String>> arrayList = new ArrayList<>();
     ProgressBar progressBar;
-    ListView listView;
-
-    ArrayList<HashMap<String, String>> arrayList = new ArrayList<>();
     HashMap<String, String> hashMap;
+    JPlayer jPlayer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        jPlayer = findViewById(R.id.jPlayer);
         progressBar = findViewById(R.id.progressBar);
-        youTubePlayerView = findViewById(R.id.youtube);
-        listView = findViewById(R.id.listView);
-
-
-        youTubePlayerView.initialize("Jumman", new YouTubePlayer.OnInitializedListener() {
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-
-                jummania_youtube_player = youTubePlayer;
-
-            }
-
-            @Override
-            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-
-            }
-        });
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        String url = "https://test-jumman.000webhostapp.com/test/json.json";
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, getString(R.string.URL), null, response -> {
 
 
+            JSONObject jsonObject;
+            try {
                 for (int x = 0; x < response.length(); x++) {
+                    jsonObject = response.getJSONObject(x);
 
-                    JSONObject jsonObject = null;
-                    try {
-                        jsonObject = response.getJSONObject(x);
+                    hashMap = new HashMap<>();
 
-                        hashMap = new HashMap<>();
+                    hashMap.put("Id", jsonObject.getString("id"));
+                    hashMap.put("title", jsonObject.getString("title"));
 
-                        hashMap.put("Id", jsonObject.getString("Id"));
+                    arrayList.add(hashMap);
 
-                        arrayList.add(hashMap);
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-
+                    recyclerView.setAdapter(new Adapter());
                 }
 
-                listView.setAdapter(new MyAdepter());
-
-                progressBar.setVisibility(View.GONE);
-
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressBar.setVisibility(View.GONE);
-            }
-        });
+
+
+            progressBar.setVisibility(View.GONE);
+
+        }, error -> progressBar.setVisibility(View.GONE));
 
         requestQueue.add(jsonArrayRequest);
 
-
     }
 
-    private class MyAdepter extends BaseAdapter {
+    private class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false));
+        }
 
         @Override
-        public int getCount() {
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+            hashMap = arrayList.get(position);
+            String videoId = hashMap.get("Id");
+            Picasso.get().load("https://i.ytimg.com/vi/" + videoId + "/0.jpg").into(holder.imageView);
+            holder.textView.setText(hashMap.get("title"));
+            holder.itemView.setOnClickListener(v -> {
+                jPlayer.setVisibility(View.VISIBLE);
+                jPlayer.loadVideoById(videoId, 0);
+            });
+        }
+
+        @Override
+        public int getItemCount() {
             return arrayList.size();
         }
 
-        @Override
-        public Object getItem(int i) {
-            return null;
-        }
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            final ImageView imageView;
+            final TextView textView;
 
-        @Override
-        public long getItemId(int i) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-
-            LayoutInflater layoutInflater = getLayoutInflater();
-
-            View myView = layoutInflater.inflate(R.layout.item, viewGroup, false);
-
-
-            ImageView imageView = myView.findViewById(R.id.imageView);
-
-            hashMap = arrayList.get(i);
-
-
-            Picasso.get()
-                    .load("https://i.ytimg.com/vi/" + hashMap.get("Id") + "/0.jpg")
-                    .into(imageView);
-
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    jummania_youtube_player.loadVideo(hashMap.get("Id"));
-                    youTubePlayerView.setVisibility(View.VISIBLE);
-                }
-            });
-
-
-            return myView;
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                imageView = itemView.findViewById(R.id.imageView);
+                textView = itemView.findViewById(R.id.textView);
+            }
         }
     }
 }

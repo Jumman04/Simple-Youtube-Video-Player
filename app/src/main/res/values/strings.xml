@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Youtube Api</string>
+    <string name="app_name">Simple Youtube Video Player</string>
+    <string name="URL">https://test-jumman.000webhostapp.com/Simple%20Youtube%20Video%20Player.json</string>
 </resources>
