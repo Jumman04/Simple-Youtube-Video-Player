@@ -45,13 +45,6 @@ We're excited to have you contribute to our Simple YouTube Video Player for Andr
 Your contributions will help make this project more valuable and educational for developers exploring YouTube integration in Android apps. Thank you for being a part of our open-source community!
 
 
-## License
-
-This project is open-source, and you are welcome to clone, modify, and use it as you see fit. There are no restrictions on editing or distributing this project. We encourage you to explore, learn, and build upon it in any way that benefits your needs.
-
-Feel free to dive into the code and make it your own! We hope this project serves as a valuable resource for your endeavors.
-
-Enjoy and happy coding!
 
 
 ---
