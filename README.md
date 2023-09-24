@@ -17,6 +17,7 @@ For the best examples of YouTube player integration and customization, I have de
 
 3. **Bangla Natok & Somahar**
    - We have added the popular Natok of all talented artist of Bangladesh here.
+     
    ![Bangla Natok & Somahar](https://github-production-user-asset-6210df.s3.amazonaws.com/113237846/270155095-f26c6175-c8cb-44d6-835b-37d13b8dbbff.png)
    - [View on Google Play](https://play.google.com/store/apps/details?id=com.mamomi.banglanatoksomahar)
 
@@ -37,10 +38,9 @@ We're excited to have you contribute to our Simple YouTube Video Player for Andr
 2. Make your desired changes or improvements.
 3. Create a pull request, describing your changes and why they are valuable.
 4. Your contribution will be reviewed and merged if it aligns with the project's goals.
+5. Feel free to check out the [Issues](https://github.com/Jumman04/Simple-Youtube-Video-Playe/issues) section for tasks you can work on.
 
-**Contributor Guidelines:**
-- Feel free to check out the [Issues](https://github.com/Jumman04/Simple-Youtube-Video-Playe/issues) section for tasks you can work on.
-- If you have any questions or need assistance, don't hesitate to reach out in the discussions or via issues.
+If you have any questions or need assistance, don't hesitate to reach out in the discussions or via issues.
 
 Your contributions will help make this project more valuable and educational for developers exploring YouTube integration in Android apps. Thank you for being a part of our open-source community!
 
