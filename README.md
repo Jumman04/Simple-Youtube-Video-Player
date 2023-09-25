@@ -35,10 +35,10 @@ We're excited to have you contribute to our Simple YouTube Video Player for Andr
 
 **How to Contribute:**
 1. Fork the repository.
-2. Make your desired changes or improvements.
-3. Create a pull request, describing your changes and why they are valuable.
-4. Your contribution will be reviewed and merged if it aligns with the project's goals.
-5. Feel free to check out the [Issues](https://github.com/Jumman04/Simple-Youtube-Video-Playe/issues) section for tasks you can work on.
+2. Feel free to check out the [Issues](https://github.com/Jumman04/Simple-Youtube-Video-Playe/issues) section for tasks you can work on.
+3. Make your desired changes or improvements.
+4. Create a pull request, describing your changes and why they are valuable.
+5. Your contribution will be reviewed and merged if it aligns with the project's goals.
 
 If you have any questions or need assistance, don't hesitate to reach out in the discussions or via issues.
 
