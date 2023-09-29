@@ -19,7 +19,7 @@
     <com.jummania.youtubeapi.JPlayer
         android:id="@+id/jPlayer"
         android:layout_width="match_parent"
-        android:layout_height="222dp"
+        android:layout_height="233dp"
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
