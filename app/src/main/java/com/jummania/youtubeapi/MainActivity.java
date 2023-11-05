@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     final ArrayList<HashMap<String, String>> arrayList = new ArrayList<>();
     ProgressBar progressBar;
     HashMap<String, String> hashMap;
-    JPlayer jPlayer;
+    WebYoutubePlayer jPlayer;
 
 
     @Override
