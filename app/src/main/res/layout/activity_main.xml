@@ -16,7 +16,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp" />
 
-    <com.jummania.youtubeapi.JPlayer
+    <com.jummania.youtubeapi.WebYoutubePlayer
         android:id="@+id/jPlayer"
         android:layout_width="match_parent"
         android:layout_height="233dp"
