@@ -1,8 +1,11 @@
 package com.jummania.youtubeapi
 
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -22,6 +25,7 @@ class MainActivityKotlin : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var hashMap: HashMap<String, String>
     private lateinit var jPlayer: JPlayerKotlin
+    private var width = Resources.getSystem().displayMetrics.heightPixels
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +61,10 @@ class MainActivityKotlin : AppCompatActivity() {
             })
 
         requestQueue.add(jsonArrayRequest)
+
+        jPlayer.layoutParams.height = (width * 0.3).toInt()
+
+
     }
 
     private inner class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
@@ -86,5 +94,14 @@ class MainActivityKotlin : AppCompatActivity() {
             val imageView: ImageView = itemView.findViewById(R.id.imageView)
             val textView: TextView = itemView.findViewById(R.id.textView)
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+
+        if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) jPlayer.layoutParams.height =
+            (width * 0.3).toInt()
+        else jPlayer.layoutParams.height = LayoutParams.MATCH_PARENT
+
     }
 }
