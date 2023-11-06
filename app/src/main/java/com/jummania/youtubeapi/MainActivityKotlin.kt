@@ -1,30 +1,27 @@
 package com.jummania.youtubeapi
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
-import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
-import org.json.JSONArray
-import org.json.JSONException
 import org.json.JSONObject
 
 
-class MainYTActivity : AppCompatActivity() {
+class MainActivityKotlin : AppCompatActivity() {
 
     val arrayList = ArrayList<HashMap<String, String>>()
     private lateinit var progressBar: ProgressBar
-    var hashMap: HashMap<String, String>? = null
-    var jPlayer: WebYoutubePlayer? = null
+    private lateinit var hashMap: HashMap<String, String>
+    private lateinit var jPlayer: JPlayerKotlin
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,45 +32,49 @@ class MainYTActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
 
         val requestQueue = Volley.newRequestQueue(this)
-        val jsonArrayRequest = JsonArrayRequest(Request.Method.GET,
-            getString(R.string.URL),
-            null,
-            { response: JSONArray ->
+
+        val jsonArrayRequest =
+            JsonArrayRequest(Request.Method.GET, getString(R.string.URL), null, { response ->
+
                 var jsonObject: JSONObject
                 try {
                     for (x in 0 until response.length()) {
                         jsonObject = response.getJSONObject(x)
                         hashMap = HashMap()
-                        hashMap!!["Id"] = jsonObject.getString("id")
-                        hashMap!!["title"] = jsonObject.getString("title")
-                        arrayList.add(hashMap!!)
-                        recyclerView.adapter = Adapter()
+                        hashMap["id"] = jsonObject.getString("id")
+                        hashMap["title"] = jsonObject.getString("title")
+                        arrayList.add(hashMap)
                     }
-                } catch (e: JSONException) {
-                    e.printStackTrace()
+                    recyclerView.adapter = Adapter()
+                    progressBar.visibility = View.GONE
+                } catch (error: Exception) {
+                    Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show()
                 }
+
+            }, { error ->
                 progressBar.visibility = View.GONE
-            }) { _: VolleyError? ->
-            progressBar.visibility = View.GONE
-        }
+                Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show()
+            })
+
         requestQueue.add(jsonArrayRequest)
     }
 
     private inner class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             return ViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item, parent, false)
+                layoutInflater.inflate(R.layout.item, parent, false)
             )
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             hashMap = arrayList[position]
-            val videoId = hashMap!!["Id"]
+            val videoId = hashMap["id"]
+
             Picasso.get().load("https://i.ytimg.com/vi/$videoId/0.jpg").into(holder.imageView)
-            holder.textView.text = hashMap!!["title"]
-            holder.itemView.setOnClickListener { v: View? ->
-                jPlayer!!.visibility = View.VISIBLE
-                jPlayer!!.loadVideoById(videoId!!, 0)
+            holder.textView.text = hashMap["title"]
+            holder.itemView.setOnClickListener {
+                jPlayer.visibility = View.VISIBLE
+                jPlayer.loadVideoById(videoId!!, 0)
             }
         }
 
@@ -82,13 +83,8 @@ class MainYTActivity : AppCompatActivity() {
         }
 
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val imageView: ImageView
-            val textView: TextView
-
-            init {
-                imageView = itemView.findViewById(R.id.imageView)
-                textView = itemView.findViewById(R.id.textView)
-            }
+            val imageView: ImageView = itemView.findViewById(R.id.imageView)
+            val textView: TextView = itemView.findViewById(R.id.textView)
         }
     }
 }

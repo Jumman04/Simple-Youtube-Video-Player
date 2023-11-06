@@ -15,7 +15,7 @@ For the best examples of YouTube player integration and customization, I have de
    ![World Music Tube](https://github-production-user-asset-6210df.s3.amazonaws.com/113237846/270154603-9214341d-5a79-4091-b764-908cab5f255d.png)
    - [View on Google Play](https://play.google.com/store/apps/details?id=com.mamomi_soft_heart.worldmusictube)
 
-3. **Bangla Natok & Somahar**
+2. **Bangla Natok & Somahar**
    - We have added the popular Natok of all talented artist of Bangladesh here.
      
    ![Bangla Natok & Somahar](https://github-production-user-asset-6210df.s3.amazonaws.com/113237846/270155095-f26c6175-c8cb-44d6-835b-37d13b8dbbff.png)

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity_Java">
 
 
     <ProgressBar
@@ -16,7 +16,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp" />
 
-    <com.jummania.youtubeapi.WebYoutubePlayer
+    <com.jummania.youtubeapi.JPlayerKotlin
         android:id="@+id/jPlayer"
         android:layout_width="match_parent"
         android:layout_height="233dp"

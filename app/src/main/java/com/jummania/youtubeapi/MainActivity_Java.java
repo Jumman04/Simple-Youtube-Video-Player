@@ -24,12 +24,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity_Java extends AppCompatActivity {
 
     final ArrayList<HashMap<String, String>> arrayList = new ArrayList<>();
     ProgressBar progressBar;
     HashMap<String, String> hashMap;
-    WebYoutubePlayer jPlayer;
+    JPlayerKotlin jPlayerKotlin;
 
 
     @Override
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        jPlayer = findViewById(R.id.jPlayer);
+        jPlayerKotlin = findViewById(R.id.jPlayer);
         progressBar = findViewById(R.id.progressBar);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
 
@@ -91,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
             Picasso.get().load("https://i.ytimg.com/vi/" + videoId + "/0.jpg").into(holder.imageView);
             holder.textView.setText(hashMap.get("title"));
             holder.itemView.setOnClickListener(v -> {
-                jPlayer.setVisibility(View.VISIBLE);
-                if (videoId != null) jPlayer.loadVideoById(videoId, 0);
+                jPlayerKotlin.setVisibility(View.VISIBLE);
+                if (videoId != null) jPlayerKotlin.loadVideoById(videoId, 0);
 
             });
         }

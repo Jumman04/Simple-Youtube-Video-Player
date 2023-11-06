@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.webkit.WebView
 
 
-class WebYoutubePlayer(context: Context, attrs: AttributeSet?) : WebView(context, attrs) {
+class JPlayerKotlin(context: Context, attrs: AttributeSet?) : WebView(context, attrs) {
 
     init {
         onInit()
@@ -20,7 +20,6 @@ class WebYoutubePlayer(context: Context, attrs: AttributeSet?) : WebView(context
     @SuppressLint("SetJavaScriptEnabled")
     private fun onInit() {
         settings.javaScriptEnabled = true
-        settings.mediaPlaybackRequiresUserGesture = true
         loadUrl("file:///android_asset/yt.html")
     }
 
