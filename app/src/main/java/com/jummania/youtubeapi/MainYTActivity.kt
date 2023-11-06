@@ -20,19 +20,24 @@ import org.json.JSONObject
 
 
 class MainYTActivity : AppCompatActivity() {
+
     val arrayList = ArrayList<HashMap<String, String>>()
-    lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: ProgressBar
     var hashMap: HashMap<String, String>? = null
     var jPlayer: WebYoutubePlayer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         jPlayer = findViewById(R.id.jPlayer)
         progressBar = findViewById(R.id.progressBar)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+
         val requestQueue = Volley.newRequestQueue(this)
-        val jsonArrayRequest = JsonArrayRequest(
-            Request.Method.GET, getString(R.string.URL), null,
+        val jsonArrayRequest = JsonArrayRequest(Request.Method.GET,
+            getString(R.string.URL),
+            null,
             { response: JSONArray ->
                 var jsonObject: JSONObject
                 try {
@@ -47,12 +52,9 @@ class MainYTActivity : AppCompatActivity() {
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
-                progressBar.setVisibility(View.GONE)
-            }
-        ) { error: VolleyError? ->
-            progressBar.setVisibility(
-                View.GONE
-            )
+                progressBar.visibility = View.GONE
+            }) { _: VolleyError? ->
+            progressBar.visibility = View.GONE
         }
         requestQueue.add(jsonArrayRequest)
     }

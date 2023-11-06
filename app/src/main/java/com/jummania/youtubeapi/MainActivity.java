@@ -92,7 +92,8 @@ public class MainActivity extends AppCompatActivity {
             holder.textView.setText(hashMap.get("title"));
             holder.itemView.setOnClickListener(v -> {
                 jPlayer.setVisibility(View.VISIBLE);
-                jPlayer.loadVideoById(videoId, 0);
+                if (videoId != null) jPlayer.loadVideoById(videoId, 0);
+
             });
         }
 
