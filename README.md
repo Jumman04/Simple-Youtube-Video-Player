@@ -1,4 +1,20 @@
 # Simple YouTube Video Player for Android
+<p align="center">
+	<img src="https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat"/>
+	
+  <a href="https://github.com/Jumman04/Simple-Youtube-Video-Player/issues">
+    <img src="https://img.shields.io/github/issues/Jumman04/Simple-Youtube-Video-Player"/>
+  </a>
+  <a href="https://github.com/Jumman04/Simple-Youtube-Video-Player/network/members">
+    <img src="https://img.shields.io/github/forks/Jumman04/Simple-Youtube-Video-Player"/>
+  </a>
+  <a href="https://github.com/Jumman04/Simple-Youtube-Video-Player/stargazers">
+    <img src="https://img.shields.io/github/stars/Jumman04/Simple-Youtube-Video-Player"/>
+  </a>
+    <a href="https://github.com/Jumman04/Simple-Youtube-Video-Player/LICENSE">
+    <img src="https://img.shields.io/github/license/Jumman04/Simple-Youtube-Video-Player"/>
+  </a>
+</p><br>
 
 Simple YouTube Video Player is an Android app designed to showcase the usage of the YouTube iframe JavaScript player within a mobile application. This demonstration is intended for educational purposes and serves as a basic example of integrating YouTube video playback into an Android app.
 
